@@ -14,14 +14,14 @@ const PORT = process.env.PORT;
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 // Enable CORS for all routes
-
+console.log("cors ", process.env.CORS_ORIGIN);
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 async function generateRoast(resumeData) {
   try {
     // Assuming resumeData contains the necessary information for generating the prompt
     const prompt = resumeData + " This is the resume of a person, write a funny roast for them. if given data doesn't seems like resume then tell me to upload resume and give me 100 word response and in proper text. also add emoji in resume and see your response should directly mention the person by you whoese resume it is.";
-    console.log("Prompt:", prompt);
+    // console.log("Prompt:", prompt);
 
     // Get the generative model from Google Generative AI (example model)
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -30,7 +30,7 @@ async function generateRoast(resumeData) {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    console.log("Roast:", text);
+    // console.log("Roast:", text);
 
     return text; // Return the generated roast text
   } catch (error) {
