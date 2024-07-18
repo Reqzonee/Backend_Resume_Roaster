@@ -4,16 +4,17 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const pdf = require('pdf-parse');
-const cors = require('cors');
-const app = express();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 dotenv.config();
+const cors = require('cors');
+
+const app = express();
 const PORT = process.env.PORT;
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 // Enable CORS for all routes
-const cors = require('cors');
+
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 async function generateRoast(resumeData) {
